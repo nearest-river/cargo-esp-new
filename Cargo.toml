@@ -1,0 +1,11 @@
+[package]
+name = "cargo-esp-new"
+version = "1.0.0"
+edition = "2021"
+authors = ["Nearest River river177169@proton.me"]
+license = "GPL-2.0-only"
+description = "A cargo-new extension for esp8266 chips"
+repository = "https://github.com/nearest-river/cargo-esp-new"
+
+
+[dependencies]
