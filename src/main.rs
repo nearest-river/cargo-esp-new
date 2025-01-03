@@ -36,6 +36,7 @@ fn main()-> io::Result<()> {
 
 
 pub trait StatusExt {
+  /// exits the process if the status-code of the child is non-zero
   fn resolve(self);
 }
 
