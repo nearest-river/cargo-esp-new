@@ -9,3 +9,14 @@ repository = "https://github.com/nearest-river/cargo-esp-new"
 
 
 [dependencies]
+
+[profile.release]
+strip = true
+opt-level = "s"
+lto = true
+codegen-units = 1
+debug = false
+debug-assertions = false
+
+[profile.dev]
+debug = true
