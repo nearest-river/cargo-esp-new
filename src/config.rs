@@ -1,3 +1,15 @@
+//                    GNU GENERAL PUBLIC LICENSE
+//                       Version 2, June 1991
+//
+// Copyright (C) 1989, 1991 Free Software Foundation, Inc.,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+// Everyone is permitted to copy and distribute verbatim copies
+// of this license document, but changing it is not allowed.
+//
+// This configuration template is highly inspired by `https://github.com/andreas-mausch/blinky-esp8266-rust`, `https://andreas-mausch.de/blog/2024-10-20-esp01s/`
+// written by `https://github.com/andreas-mausch`
+
+
 
 use crate::StatusExt;
 use std::{
