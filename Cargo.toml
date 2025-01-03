@@ -6,7 +6,8 @@ authors = ["Nearest River river177169@proton.me"]
 license = "GPL-2.0-only"
 description = "A cargo-new extension for esp8266 chips"
 repository = "https://github.com/nearest-river/cargo-esp-new"
-
+keywords = ["esp8266", "embedded", "esp"]
+categories = ["esp8266", "embedded", "esp"]
 
 [dependencies]
 
