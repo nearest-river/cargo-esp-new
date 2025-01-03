@@ -28,8 +28,8 @@ fn main()-> io::Result<()> {
   .resolve();
 
   let project_path=&args[0];
-  config::sync_config(project_path)?;
   src::write_main(project_path)?;
+  config::sync_config(project_path)?;
 
   Ok(())
 }
