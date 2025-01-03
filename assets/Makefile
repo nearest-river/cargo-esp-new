@@ -9,5 +9,5 @@ flash:
 	rustup run esp cargo espflash flash --release --target $(TARGET)
 
 run:
-	rustup run esp cargo run --release --target $(TARGET)
+	rustup run esp cargo espflash flash --monitor --release --target $(TARGET)
 
