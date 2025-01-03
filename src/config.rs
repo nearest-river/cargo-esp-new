@@ -52,7 +52,13 @@ run:
   @RUSTFLAGS="$(RUSTFLAGS)" rustup run esp cargo run --release --target $(TARGET)
 "#;
 
-static CARGO_TOML: &str=r#"
+static CARGO_TOML: &str=r#"log = { version = "0.4.22" }
+xtensa-lx-rt = { version = "0.16.0", features = ["esp8266"] }
+xtensa-lx = { version = "0.7.0", features = ["esp8266"] }
+panic-halt = "0.2.0"
+esp8266-hal = { version = "0.5.0" }
+esp8266 = "0.6.0"
+embedded-hal = { version = "0.2.4", features = ["unproven"] }
 
 [profile.dev]
 # Rust debug is too slow.
@@ -68,16 +74,6 @@ lto = 'fat'
 opt-level = 's'
 overflow-checks = false
 "#;
-
-static DEPS: [Dependency<'static>;7]=[
-  ("log",&[]),
-  ("xtensa-lx-rt",&["esp8266"]),
-  ("xtensa-lx",&["esp8266"]),
-  ("panic-halt",&[]),
-  ("esp8266-hal",&[]),
-  ("esp8266",&[]),
-  ("embedded-hal",&["unproven"])
-];
 
 
 
@@ -95,24 +91,10 @@ pub fn sync_config<P: AsRef<Path>>(project_path: P)-> io::Result<()> {
   write!(file,"{}",CARGO_TOML)?;
   drop(file); // dropping it early so that other processes can access it freely.
 
-
-  DEPS.into_iter()
-  .map(add_dependency)
-  .collect::<Result<Vec<_>,_>>()?;
-  Ok(())
-}
-
-/// name and features pair
-type Dependency<'a>=(&'a str,&'a [&'a str]);
-
-fn add_dependency(dep: Dependency<'_>)-> io::Result<()> {
-  let mut process=Command::new("cargo");
-  process.arg("add")
-  .arg(dep.0)
-  .args(dep.1)
+  Command::new("cargo")
+  .arg("c")
   .status()?
   .resolve();
-
   Ok(())
 }
 
