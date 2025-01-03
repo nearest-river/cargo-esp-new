@@ -13,6 +13,7 @@
 
 use crate::StatusExt;
 use std::{
+  env,
   path::Path,
   process::Command,
   fs::{
@@ -81,17 +82,16 @@ static DEPS: [Dependency<'static>;7]=[
 
 
 pub fn sync_config<P: AsRef<Path>>(project_path: P)-> io::Result<()> {
-  let project_path=project_path.as_ref();
-  let cargo_dir=project_path.join(".cargo");
+  env::set_current_dir(project_path)?;
 
-  fs::create_dir_all(&cargo_dir)?;
-  fs::write(cargo_dir.join("config.toml"),CONFIG_TOML)?;
-  fs::write(project_path.join("Makefile"),MAKEFILE)?;
+  fs::create_dir_all(".cargo")?;
+  fs::write(".cargo/config.toml",CONFIG_TOML)?;
+  fs::write("Makefile",MAKEFILE)?;
 
   let mut file=OpenOptions::new()
   .write(true)
   .append(true)
-  .open(project_path.join("Cargo.toml"))?;
+  .open("Cargo.toml")?;
   write!(file,"{}",CARGO_TOML)?;
   drop(file); // dropping it early so that other processes can access it freely.
 
