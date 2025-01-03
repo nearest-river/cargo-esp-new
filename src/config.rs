@@ -91,8 +91,8 @@ pub fn sync_config<P: AsRef<Path>>(project_path: P)-> io::Result<()> {
   write!(file,"{}",CARGO_TOML)?;
   drop(file); // dropping it early so that other processes can access it freely.
 
-  Command::new("cargo")
-  .arg("c")
+  Command::new("rustup")
+  .args(["run","esp","cargo","check","--target","xtensa-esp8266-none-elf"])
   .status()?
   .resolve();
   Ok(())
