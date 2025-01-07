@@ -1,13 +1,10 @@
-TARGET=xtensa-esp8266-none-elf
-export RUSTFLAGS=-C link-arg=-nostartfiles -C link-arg=-Wl,-Tlink.x
-
 
 build:
-	rustup run esp cargo build --target $(TARGET)
+	cargo esp-build
 
 flash:
-	rustup run esp cargo espflash flash --release --target $(TARGET)
+	cargo esp-build --release --flash
 
 run:
-	rustup run esp cargo espflash flash --monitor --release --target $(TARGET)
+	cargo esp-build --flash --monitor --release
 

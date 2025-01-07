@@ -24,6 +24,7 @@ use std::{
   }
 };
 
+static TARGET: &str="xtensa-esp8266-none-elf";
 static MAKEFILE: &str=include_str!("../assets/Makefile");
 static CONFIG_TOML: &str=include_str!("../assets/config.toml");
 static CARGO_TOML: &str=include_str!("../assets/Cargo-append.toml");
@@ -44,7 +45,7 @@ pub fn sync_config<P: AsRef<Path>>(project_path: P)-> io::Result<()> {
   drop(file); // dropping it early so that other processes can access it freely.
 
   Command::new("rustup")
-  .args(["run","esp","cargo","fetch","--target","xtensa-esp8266-none-elf"])
+  .args(["run","esp","cargo","fetch","--target",TARGET])
   .status()?
   .resolve();
   Ok(())

@@ -1,5 +1,5 @@
 [target.xtensa-esp8266-none-elf]
-runner = "espflash flash --monitor"
+runner = "esp-build --flash --monitor"
 
 [env]
 ESP_LOG="info"
