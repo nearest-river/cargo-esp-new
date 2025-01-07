@@ -20,7 +20,7 @@ use std::{
 
 
 fn main()-> io::Result<()> {
-  let args=env::args().skip(2).collect::<Vec<_>>();
+  let args=parse_args();
   let mut process=Command::new("cargo");
   process.arg("new")
   .args(&args)
@@ -48,6 +48,15 @@ impl StatusExt for ExitStatus {
       _=> ()
     }
   }
+}
+
+fn parse_args()-> Vec<String> {
+  env::args()
+  .skip(1)
+  .enumerate()
+  .filter(|(i,arg)| !(*i==0 && arg=="esp-new"))
+  .map(|(_,arg)| arg)
+  .collect()
 }
 
 
